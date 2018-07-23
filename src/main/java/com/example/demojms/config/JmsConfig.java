@@ -9,6 +9,7 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.util.StringUtils;
 
 import javax.jms.ConnectionFactory;
 
@@ -28,7 +29,7 @@ public class JmsConfig {
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory() {
-        if ( "".equals(user) ) {
+        if (StringUtils.isEmpty(user)) {
             return new ActiveMQConnectionFactory(brokerUrl);
         }
         return new ActiveMQConnectionFactory(user, password, brokerUrl);
